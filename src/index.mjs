@@ -5,7 +5,7 @@ export { ReactNativeFile } from './ReactNativeFile'
  * An extractable file.
  * @kind typedef
  * @name ExtractableFile
- * @type {File|Blob|ReactNativeFile}
+ * @type {File|Blob|ReactNativeFile|ReadStream}
  */
 
 /**

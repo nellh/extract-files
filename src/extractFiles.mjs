@@ -1,9 +1,11 @@
+import { ReadStream } from 'fs'
 import { ReactNativeFile } from './ReactNativeFile'
 
 /**
  * Clones a value, recursively extracting
  * [`File`](https://developer.mozilla.org/docs/web/api/file),
- * [`Blob`](https://developer.mozilla.org/docs/web/api/blob) and
+ * [`Blob`](https://developer.mozilla.org/docs/web/api/blob),
+ * [`ReadStream`](https://nodejs.org/api/fs.html#fs_class_fs_readstream) and
  * [`ReactNativeFile`]{@link ReactNativeFile} instances with their
  * [object paths]{@link ObjectPath}, replacing them with `null`.
  * [`FileList`](https://developer.mozilla.org/docs/web/api/filelist) instances
@@ -69,6 +71,7 @@ export function extractFiles(value, path = '') {
   if (
     (typeof File !== 'undefined' && value instanceof File) ||
     (typeof Blob !== 'undefined' && value instanceof Blob) ||
+    (typeof ReadStream !== 'undefined' && value instanceof ReadStream) ||
     value instanceof ReactNativeFile
   ) {
     clone = null

@@ -1,3 +1,4 @@
+import { ReadStream } from 'fs'
 import t from 'tap'
 import { extractFiles } from './extractFiles'
 import { ReactNativeFile } from './ReactNativeFile'
@@ -110,6 +111,25 @@ t.test('Extracts a ReactNativeFile instance in an object value.', t => {
     },
     'Result.'
   )
+
+  t.end()
+})
+
+t.test('Extracts a ReadStream instance in an object value.', t => {
+  const original = global.ReadStream
+  global.ReadStream = class ReadStream {}
+  const file = new ReadStream()
+
+  t.strictDeepEqual(
+    extractFiles({ a: file }),
+    {
+      clone: { a: null },
+      files: new Map([[file, ['a']]])
+    },
+    'Result.'
+  )
+
+  global.ReadStream = original
 
   t.end()
 })
